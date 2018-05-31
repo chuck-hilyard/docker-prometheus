@@ -1,6 +1,7 @@
 global:
 scrape_configs:
   - job_name: consul
+    metrics_path: ''
     consul_sd_configs:
       - server: 'consul.media.dev.usa.reachlocalservices.com:8500'
     relabel_configs:
@@ -15,19 +16,25 @@ scrape_configs:
     static_configs:
       - targets:
         - https://media-core-gateway.media.dev.usa.reachlocalservices.com:8080/media-core-gateway/health/status
+        - https://media-reporting.media.dev.usa.reachlocalservices.com:8080/media-reporting/health/status
+        - https://media-gateway.media.dev.usa.reachlocalservices.com:8080/media-gateway/health/status
+        - https://media.media.dev.usa.reachlocalservices.com/#!/home/search
+        - http://config-server.media.dev.usa.reachlocalservices.com:8080/health/status
+        - https://madmin-client.media.dev.usa.reachlocalservices.com/#/home/search
+        - https://proposal-tool-v2.media.dev.usa.reachlocalservices.com/proposal-tool-v2/health/status
+        - https://proposal-tool-client.media.dev.usa.reachlocalservices.com/#!/proposal-tool
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 172.17.0.2:9115  # The blackbox exporter's real hostname:port
+        replacement: 172.17.0.3:9115  # The blackbox exporter's real hostname:port.
 alerting:
   alertmanagers:
   - scheme: http
     static_configs:
     - targets:
       - "172.17.0.4:9093"
-
 rule_files:
 - /etc/prometheus/alerting_rules_*.yml
