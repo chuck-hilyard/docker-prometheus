@@ -23,11 +23,11 @@ scrape_configs:
       module: [http_2xx]  # Look for a HTTP 200 response.
     static_configs:
       - targets:
-        - http://media-core-gateway:8080/media-core-gateway/health/status
-        - http://media-reporting:8080/media-reporting/health/status
-        - http://media-gateway:8080/media-gateway/health/status
+        - http://media-core-gateway/media-core-gateway/health/status
+        - http://media-reporting/media-reporting/health/status
+        - http://media-gateway/media-gateway/health/status
         - https://media.media.dev.usa.reachlocalservices.com/#!/home/search
-        - http://config-server:8080/health/status
+        - http://config-server/health/status
         - https://madmin-client.media.dev.usa.reachlocalservices.com/#/home/search
         - http://proposal-tool-v2/proposal-tool-v2/health/status
         - https://proposal-tool-client.media.dev.usa.reachlocalservices.com/#!/proposal-tool
