@@ -9,7 +9,7 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_consul_service]
         target_label: job
-  - job_name: 'blackbox'
+  - job_name: 'endpoint_health_checks'
     metrics_path: /probe
     params:
       module: [http_2xx]  # Look for a HTTP 200 response.
@@ -30,6 +30,7 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 172.17.0.3:9115  # The blackbox exporter's real hostname:port.
+alerting:
 alerting:
   alertmanagers:
   - scheme: http
