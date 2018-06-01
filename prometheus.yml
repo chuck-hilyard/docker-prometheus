@@ -1,7 +1,9 @@
 global:
 scrape_configs:
-  - job_name: consul
-    metrics_path: ''
+  - job_name: 'docker_hosts'
+    metrics_path: /probe
+    params:
+      module: [tcp_connect]
     consul_sd_configs:
       - server: 'consul.media.dev.usa.reachlocalservices.com:8500'
     relabel_configs:
@@ -9,6 +11,12 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_consul_service]
         target_label: job
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 172.17.0.3:9115  # The blackbox exporter's real hostname:port.
   - job_name: 'endpoint_health_checks'
     metrics_path: /probe
     params:
