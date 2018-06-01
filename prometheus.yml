@@ -44,6 +44,6 @@ alerting:
   - scheme: http
     static_configs:
     - targets:
-      - "prometheus-alert-manager:9093"
+      - "prometheus-alertmanager:9093"
 rule_files:
 - /etc/prometheus/alerting_rules_*.yml
