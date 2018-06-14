@@ -39,7 +39,6 @@ scrape_configs:
       - target_label: __address__
         replacement: prometheus-blackbox:9115
 alerting:
-alerting:
   alertmanagers:
   - scheme: http
     static_configs:
