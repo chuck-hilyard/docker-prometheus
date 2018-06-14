@@ -3,6 +3,6 @@ groups:
   rules:
   - alert: service_endpoint_health_check
     expr: probe_success{job="endpoint_health_checks"} == 0
-    for: 5m
+    for: 1m
     annotations:
       summary: Service endpoint failed health check
