@@ -10,7 +10,7 @@ scrape_configs:
       - source_labels: [__meta_consul_tags]
         action: keep
       - source_labels: [__meta_consul_tags]
-			  regex: .*,url_health_check,.*
+        regex: .*,url_health_check,.*
         action: drop
       - source_labels: [__meta_consul_service]
         target_label: job
