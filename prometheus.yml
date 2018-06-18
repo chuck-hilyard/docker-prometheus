@@ -17,24 +17,16 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: prometheus-blackbox:9115 
-  - job_name: 'endpoint_health_checks'
+  - job_name: 'url_health_checks'
     metrics_path: /probe
     params:
       module: [http_2xx]  # Look for a HTTP 200 response.
-    static_configs:
-      - targets:
-        - http://media-core-gateway/media-core-gateway/health/status
-        - http://media-reporting/media-reporting/health/status
-        - http://media-gateway/media-gateway/health/status
-        - https://media.media.dev.usa.reachlocalservices.com/#!/home/search
-        - http://config-server/health/status
-        - https://madmin-client.media.dev.usa.reachlocalservices.com/#/home/search
-        - http://proposal-tool-v2/proposal-tool-v2/health/status
-        - https://proposal-tool-client.media.dev.usa.reachlocalservices.com/#!/proposal-tool
+    consul_sd_configs:
+      - targets: 'consul:8500'
     relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
+      - source_labels: [__meta_consul_service_address]
+        target_label: __tmp_param_target
+      - source_labels: [__tmp_param_target]
         target_label: instance
       - target_label: __address__
         replacement: prometheus-blackbox:9115
