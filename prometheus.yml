@@ -22,7 +22,7 @@ scrape_configs:
     params:
       module: [http_2xx]  # Look for a HTTP 200 response.
     consul_sd_configs:
-      - targets: 'consul:8500'
+      - server: 'consul:8500'
     relabel_configs:
       - source_labels: [__meta_consul_service_address]
         target_label: __tmp_param_target
