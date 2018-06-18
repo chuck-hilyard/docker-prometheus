@@ -27,11 +27,8 @@ scrape_configs:
     consul_sd_configs:
       - server: 'consul:8500'
     relabel_configs:
-      - source_labels: [__meta_consul_service_address]
-        target_label: __param_target
-      - source_labels: [__param_target]
+      - source_labels: [__address__]
         target_label: instance
-        replacement: '${1}:${2}'
       - target_label: __address__
         replacement: prometheus-blackbox:9115
 alerting:
