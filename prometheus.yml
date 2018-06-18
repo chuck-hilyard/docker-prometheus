@@ -32,6 +32,8 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_consul_service_address]
         target_label: instance
+      - source_labels: instance
+        target_label: __param_target
       - target_label: __address__
         replacement: prometheus-blackbox:9115
 alerting:
