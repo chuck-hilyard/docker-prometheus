@@ -3,7 +3,7 @@ groups:
   rules:
   - alert: service_endpoint_health_check
     expr: probe_success{job="url_health_checks"} == 0
-    for: 1m
+    for: 15s 
     labels: 
       severity: critical
     annotations:
