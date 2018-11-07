@@ -15,6 +15,8 @@ node('common')  {
       git branch: "${BRANCH}", // <- this needs to be solved
       url: "${github_repo}"
     }
+  }
+}
 
 node('docker-builds') {
 
