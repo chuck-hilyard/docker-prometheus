@@ -15,6 +15,7 @@ node('common')  {
       git branch: "${BRANCH}", // <- this needs to be solved
       url: "${github_repo}"
       stash includes: 'Dockerfile', name: 'dockerfile'
+      stash includes: '*.yml', name: 'yaml_files'
     }
   }
   catch(err) {
@@ -27,6 +28,7 @@ node('docker-builds') {
 
   stage('Docker Build') {
 		unstash 'dockerfile'
+		unstash 'yaml_files'
     sh "docker build -t ${PROJECT_NAME}:${BRANCH} ."
     sh "docker tag ${PROJECT_NAME}:${BRANCH} ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${BRANCH}"
   }
