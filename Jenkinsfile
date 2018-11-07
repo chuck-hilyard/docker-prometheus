@@ -16,6 +16,10 @@ node('common')  {
       url: "${github_repo}"
     }
   }
+  catch(err) {
+    currentBuild.result = "FAILURE"
+  throw err
+  }
 }
 
 node('docker-builds') {
