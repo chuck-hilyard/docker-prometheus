@@ -14,6 +14,7 @@ node('common')  {
     stage('Code Checkout') {
       git branch: "${BRANCH}", // <- this needs to be solved
       url: "${github_repo}"
+      stash includes: 'Dockerfile', name: 'dockerfile'
     }
   }
   catch(err) {
