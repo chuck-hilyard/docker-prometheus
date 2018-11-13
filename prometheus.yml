@@ -7,10 +7,10 @@ scrape_configs:
       module: [tcp_connect]
     consul_sd_configs:
       - server: 'consul:8500'
-        tag: ""
     relabel_configs:
       - source_labels: [__meta_consul_tags]
-        action: keep
+        regex: udp
+        action: drop
       - source_labels: [__meta_consul_service]
         target_label: job
       - source_labels: [__address__]
