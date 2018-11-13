@@ -7,7 +7,7 @@ scrape_configs:
       module: [tcp_connect]
     consul_sd_configs:
       - server: 'consul:8500'
-        tag: "udp"
+        tag: ""
     relabel_configs:
       - source_labels: [__meta_consul_tags]
         action: keep
