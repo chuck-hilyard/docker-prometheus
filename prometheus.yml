@@ -19,7 +19,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: prometheus-blackbox:9115 
+        replacement: prometheus-blackbox:80 
   - job_name: 'url_health_checks'
     metrics_path: /probe
     params:
@@ -35,7 +35,7 @@ scrape_configs:
       - source_labels: [__meta_consul_service_address]
         target_label: __param_target
       - target_label: __address__
-        replacement: prometheus-blackbox:9115
+        replacement: prometheus-blackbox:80
 alerting:
   alertmanagers:
   - scheme: http
