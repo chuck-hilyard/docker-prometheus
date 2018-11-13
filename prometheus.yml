@@ -1,6 +1,7 @@
 global:
 scrape_configs:
   - job_name: 'docker_hosts'
+    honor_labels: true
     metrics_path: /probe
     params:
       module: [tcp_connect]
@@ -21,6 +22,7 @@ scrape_configs:
       - target_label: __address__
         replacement: prometheus-blackbox:80 
   - job_name: 'url_health_checks'
+    honor_labels: true
     metrics_path: /probe
     params:
       module: [http_2xx]  # Look for a HTTP 200 response.
