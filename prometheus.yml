@@ -7,6 +7,7 @@ scrape_configs:
       module: [tcp_connect]
     consul_sd_configs:
       - server: 'consul:8500'
+        tag: "udp"
     relabel_configs:
       - source_labels: [__meta_consul_tags]
         action: keep
@@ -35,25 +36,6 @@ scrape_configs:
         target_label: __param_target
       - target_label: __address__
         replacement: prometheus-blackbox:80
-  - job_name: 'udp_not_monitored'
-    honor_labels: true
-    metrics_path: /probe
-    params:
-      module: [tcp_connect]
-    consul_sd_configs:
-      - server: 'consul:8500'
-    relabel_configs:
-      - source_labels: [__meta_consul_tags]
-        regex: .*,udp,.*
-        action: keep
-      - source_labels: [__meta_consul_service]
-        target_label: job
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: prometheus-blackbox:80 
 alerting:
   alertmanagers:
   - scheme: http
