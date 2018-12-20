@@ -1,0 +1,12 @@
+groups:
+- name: infrastructure
+  rules:
+  - alert: node-down
+    expr: probe_success{job=~"ping.*hosts"} == 0
+    for: 2m
+
+    annotations:
+      identifier: "{{ $labels.instance }}.{{ $labels.group }}"
+      description: "_{{ $labels.job }}_ is alerting on _{{ $labels.instance }}_"
+      fail_msg: "is down. "
+      restore_msg: "is back up. "
