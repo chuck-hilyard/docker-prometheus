@@ -5,7 +5,7 @@ scrape_configs:
     honor_labels: true
     metrics_path: /probe
     params:
-      module: [tcp_connect]
+      module: [http_2xx]
     consul_sd_configs:
       - server: 'consul:8500'
     relabel_configs:
