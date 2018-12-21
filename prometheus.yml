@@ -9,16 +9,11 @@ scrape_configs:
     consul_sd_configs:
       - server: 'consul:8500'
     relabel_configs:
-      - source_labels: [__meta_consul_tags]
-        regex: udp
-        action: drop
-      - source_labels: [__meta_consul_service]
-        target_label: job
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
+      - source_labels: [__meta_consul_service_id]
+        target_label: service
+      - source_labels: [__meta_consul_address]
         target_label: instance
-      - target_label: __address__
+      - source_label: [__meta_consul_tags]
         replacement: prometheus-blackbox:80 
   - job_name: 'endpoint_health_checks'
     honor_labels: true
