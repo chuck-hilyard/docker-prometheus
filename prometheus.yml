@@ -12,6 +12,9 @@ scrape_configs:
       - source_labels: [__meta_consul_service_port]
         regex: '(8300|8302|8500|8600)' 
         action: drop
+      - source_labels: [__meta_consul_tags]
+        regex: ',health_check_this,'
+        action: drop
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
