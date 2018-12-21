@@ -9,6 +9,18 @@ scrape_configs:
     consul_sd_configs:
       - server: 'consul:8500'
     relabel_configs:
+      - source_labels: [__address__]
+        target_label: __address__
+      - target_label: __address__
+        replacement: prometheus-blackbox:80 
+  - job_name: 'endpoint_health_checks'
+    honor_labels: true
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    consul_sd_configs:
+      - server: 'consul:8500'
+    relabel_configs:
       - source_labels: [__meta_consul_service_id]
         target_label: service
       - source_labels: [__meta_consul_address]
@@ -17,23 +29,6 @@ scrape_configs:
         target_label: __address__
       - target_label: __address__
         replacement: prometheus-blackbox:80 
-  - job_name: 'endpoint_health_checks'
-    honor_labels: true
-    metrics_path: /probe
-    params:
-      module: [http_2xx]  # Look for a HTTP 200 response.
-    consul_sd_configs:
-      - server: 'consul:8500'
-        tag: "endpoint_health_check"
-    relabel_configs:
-      - source_labels: [__meta_consul_tags]
-        action: keep
-      - source_labels: [__meta_consul_service_address]
-        target_label: instance
-      - source_labels: [__meta_consul_service_address]
-        target_label: __param_target
-      - target_label: __address__
-        replacement: prometheus-blackbox:80
 alerting:
   alertmanagers:
   - scheme: http
