@@ -13,7 +13,7 @@ scrape_configs:
         target_label: service
       - source_labels: [__meta_consul_address]
         target_label: instance
-      - source_label: [__meta_consul_tags]
+      - source_labels: [__meta_consul_tags]
         replacement: prometheus-blackbox:80 
   - job_name: 'endpoint_health_checks'
     honor_labels: true
