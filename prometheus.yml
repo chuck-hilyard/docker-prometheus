@@ -27,7 +27,7 @@ scrape_configs:
       - server: 'consul:8500'
     relabel_configs:
       - source_labels: [__meta_consul_tags]
-        regex: 'health_check_this'
+        regex: ',health_check_this,'
         target_label: url
       - target_label: __address__
         replacement: prometheus-blackbox:80 
