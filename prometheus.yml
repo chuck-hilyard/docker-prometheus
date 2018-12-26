@@ -14,7 +14,7 @@ scrape_configs:
         action: drop
       - source_labels: [__address__]
         regex: '10.233.8.40:33254'
-        action: drop
+        action: keep
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
