@@ -13,6 +13,9 @@ scrape_configs:
         regex: '(8300|8302|8500|8600)' 
         action: drop
       - source_labels: [__address__]
+        regex: '(10.233)' 
+        action: keep
+      - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
