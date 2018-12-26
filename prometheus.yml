@@ -13,7 +13,7 @@ scrape_configs:
         regex: '(8300|8302|8500|8600)' 
         action: drop
       - source_labels: [__address__]
-        regex: '10.233.137.103:32852'
+        regex: '(.*)(:.*)'
         action: keep
         target_label: __param_target
       - source_labels: [__param_target]
