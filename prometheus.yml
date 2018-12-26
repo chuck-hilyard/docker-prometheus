@@ -9,8 +9,11 @@ scrape_configs:
     consul_sd_configs:
       - server: 'consul:8500'
     relabel_configs:
+      - source_labels: [__meta_consul_service_port]
+        regex: '(8300|8302|8500|8600)'
+        action: drop
       - source_labels: [__address__]
-        regex: '.*^[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}\:[0-9]{1,6}.*'
+        regex: '10.233.8.40:33254'
         action: drop
       - source_labels: [__address__]
         target_label: __param_target
