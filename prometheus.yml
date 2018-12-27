@@ -36,7 +36,7 @@ scrape_configs:
         target_label: 'endpoint_url'
       - source_labels: [endpoint_url]
         target_label: instance
-      - target_label: __address__
+      - target_label: instance
         replacement: prometheus-blackbox:80 
 alerting:
   alertmanagers:
