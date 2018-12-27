@@ -31,7 +31,7 @@ scrape_configs:
     relabel_configs:
       - source_labels: [__meta_consul_tags]
         target_label: 'endpoint_url'
-        regex: '.*monitor_this=([^,]*.*'
+        regex: '.*monitor_this=([^,]*).*'
         replacement: '${1}'
       - target_label: endpoint_url
         replacement: prometheus-blackbox:80 
