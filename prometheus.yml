@@ -33,7 +33,7 @@ scrape_configs:
         regex: ',.*monitor_this=([^,]*).*,'
         action: keep
         replacement: '${1}'
-        target_label: 'endpoint_url'
+        target_label: endpoint_url
       - source_labels: [endpoint_url]
         target_label: __param_target
       - source_labels: [__param_target]
