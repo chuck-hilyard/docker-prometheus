@@ -34,7 +34,7 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_consul_tags]
         target_label: __param_target
-        replacement: "duhhh:${1}${2}"
+        replacement: "duhhh:${2}"
       - source_labels: [__param_target]
         target_label: endpoint_health_check
       - target_label: __meta_consul_tags
