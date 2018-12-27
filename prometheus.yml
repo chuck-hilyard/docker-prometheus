@@ -33,9 +33,9 @@ scrape_configs:
         regex: ',.*monitor_this=([^,]*).*,'
         action: keep
         replacement: '${1}'
+        target_label: endpoint_url
+      - source_labels: [__param_target]
         target_label: instance
-      - source_labels: [__address__]
-        target_label: __param_target
       - target_label: __address__
         replacement: prometheus-blackbox:80 
 alerting:
