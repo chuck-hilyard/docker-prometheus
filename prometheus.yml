@@ -34,6 +34,7 @@ scrape_configs:
         action: keep
       - source_labels: [__address__]
         target_label: __param_target
+        replacement: "https://${1}"
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
