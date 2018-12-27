@@ -32,8 +32,8 @@ scrape_configs:
       - source_labels: [__meta_consul_tags]
         regex: ',(monitor_this:.*),'
         action: keep
-        target_label: __param_target
-      - target_label: __param_target
+        target_label: __health_target__
+      - target_label: __health_target__
         replacement: prometheus-blackbox:80 
 alerting:
   alertmanagers:
