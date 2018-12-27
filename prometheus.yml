@@ -30,11 +30,11 @@ scrape_configs:
       - server: 'consul:8500'
     relabel_configs:
       - source_labels: [__meta_consul_tags]
-        regex: ',(monitor_this:.*),'
+        regex: ',(monitor_this,.*),'
         action: keep
       - source_labels: [__meta_consul_tags]
         target_label: __param_target
-        replacement: "duhhh:${2}"
+        replacement: "duhhh:${1}duhh${2}"
       - source_labels: [__param_target]
         target_label: endpoint_health_check
       - target_label: __meta_consul_tags
