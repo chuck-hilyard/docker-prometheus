@@ -35,6 +35,8 @@ scrape_configs:
         action: replace
         replacement: '${1}'
         target_label: monitor_this
+      - source_labels: [monitor_this]
+        target_label: __address__
       - source_labels: [__param_target]
         separator: ','
         target_label: instance
