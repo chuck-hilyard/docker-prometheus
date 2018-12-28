@@ -41,7 +41,7 @@ scrape_configs:
       - source_labels: [__address__]
         separator: ','
         target_label: __param_target
-        replacement: monitor_this
+        replacement: "https://${1}"
       - source_labels: [__param_target]
         separator: ','
         target_label: instance
