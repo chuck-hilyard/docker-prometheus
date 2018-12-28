@@ -32,7 +32,7 @@ scrape_configs:
       - source_labels: [__meta_consul_tags]
         separator: ','
         regex: ',.*monitor_this=([^,]*).*,'
-        action: keep
+        action: replace
         replacement: '${1}'
         target_label: monitor_this
       - source_labels: [__param_target]
