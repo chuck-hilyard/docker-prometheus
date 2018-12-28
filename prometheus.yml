@@ -36,7 +36,7 @@ scrape_configs:
         target_label: endpoint_url
       - source_labels: [__meta_consul_service_address]
         target_label: __param_target
-      - source_labels: [endpoint_url]
+      - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
         replacement: prometheus-blackbox:80 
