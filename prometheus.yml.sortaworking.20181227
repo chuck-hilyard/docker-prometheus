@@ -29,15 +29,23 @@ scrape_configs:
     consul_sd_configs:
       - server: 'consul:8500'
     relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        separator: ','
+        regex: ',.*monitor_this=([^,]*).*,'
+        action: replace
+        replacement: '${1}'
+        target_label: monitor_this
+      - source_labels: [monitor_this]
+        separator: ','
+        target_label: __address__
       - source_labels: [__address__]
-        regex: '([a-zA-Z]).*$'
-        action: keep
-      - source_labels: [__address__]
+        separator: ','
         target_label: __param_target
-        replacement: "https://${1}"
       - source_labels: [__param_target]
+        separator: ','
         target_label: instance
       - target_label: __address__
+        separator: ','
         replacement: prometheus-blackbox:80 
 alerting:
   alertmanagers:
