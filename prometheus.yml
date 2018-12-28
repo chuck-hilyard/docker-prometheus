@@ -30,13 +30,16 @@ scrape_configs:
       - server: 'consul:8500'
     relabel_configs:
       - source_labels: [__meta_consul_tags]
+        separator: ','
         regex: ',.*monitor_this=([^,]*).*,'
         action: keep
         replacement: '${1}'
-        target_label: __param_target
+        target_label: monitor_this
       - source_labels: [__param_target]
+        separator: ','
         target_label: instance
       - target_label: __address__
+        separator: ','
         replacement: prometheus-blackbox:80 
 alerting:
   alertmanagers:
