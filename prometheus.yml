@@ -34,7 +34,7 @@ scrape_configs:
         action: keep
         replacement: '${1}'
         target_label: endpoint_url
-      - source_labels: [__address__]
+      - source_labels: [__meta_consul_service_address]
         target_label: __param_target
       - source_labels: [endpoint_url]
         target_label: instance
